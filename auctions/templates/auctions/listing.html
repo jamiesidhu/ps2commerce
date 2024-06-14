@@ -1,0 +1,39 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <!--image-->
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{listing.img_url}}" alt="..." /></div>
+                <div class="col-md-6">
+                    <!--listing info-->
+                    <div class="small mb-1">Category: {{listing.category}}</div>
+                    <h1 class="display-5 fw-bolder">{{listing.title}}</h1>
+                    <p class="lead">{{listing.description}}</p>
+                    <!--Bidding-->
+                    <div class="fs-5 mb-5">
+                        <h4>Bid: ${{listing.start_bid}}</h4>
+                    </div>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="{{listing.start_bid}}" style="max-width: 10rem" />
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Bid
+                        </button>
+                    </div>
+                    <!--Watchlist-->
+                    {% if user.is_authenticated and user.id != listing.seller.id %}
+                        {% if on_watchlist %}
+                            <a href="{% url 'remove_watchlist' %}">Remove from watchlist</a>
+                            <a href="{% url 'add_watchlist' %}">Add to Watchlist</a>
+                    <!--Seller-->
+                    <div style="margin:15px">
+                        <p>Listed by: {{listing.seller}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+{% endblock %}
