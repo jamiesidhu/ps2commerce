@@ -103,7 +103,7 @@ def listing(request, title):
     # Watchlist
     if request.user.is_authenticated:
         watchlist_item = Watchlist.objects.filter(
-                the_listing = title,
+                the_listing = Listing.objects.get(title=title),
                 the_user = User.objects.get(id=request.user.id)
         ).first()
 
@@ -119,7 +119,13 @@ def listing(request, title):
         "on_watchlist": on_watchlist
     })
 
-def watchlist(request):
+def get_watchlist(request):
+    pass
+
+def add_watchlist(request):
+    pass
+
+def remove_watchlist(request):
     pass
 
 def categories(request):
